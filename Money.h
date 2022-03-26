@@ -19,6 +19,18 @@ class Money{
     void setDollars(int dollars);
     void setCents(int cents );
 
+    friend bool operator == (const Money&, const Money&);
+    friend bool operator != (const Money&, const Money&);
+    friend bool operator < (const Money&, const Money&);
+    friend bool operator > (const Money&, const Money&);
+    friend bool operator <= (const Money&, const Money&);
+    friend bool operator >= (const Money&, const Money&);
+
+
+    friend Money operator + (const Money&, const Money&);
+    friend Money operator - (const Money&, const Money&);
+
+
     friend std::ostream& operator << (std::ostream &stream, const Money &cash);
 
 };
