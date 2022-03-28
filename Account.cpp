@@ -4,65 +4,59 @@
 
 using namespace std;
 
-void Account::makeDeposit (Money) {
-  int dollars, cents;
-  Account::update = true;
-  Account::deposit += 1;
-  cout << "Enter dollar amount for deposit: " << endl;
-  cin >> dollars;
-  Account::initialBalance.setDollars(dollars);
-  cout << "Enter cents for deposit: " << endl;
-  cin >> cents;
-	Account::initialBalance.setCents(cents);
-  Account::deposits.push_back(initialBalance);
+void Account::makeDeposit (Money money) {
+    update = true;
+    deposits.push_back(money);
+    totalDeposits++;
+}
+//I changed your makeDeposits and makeWithdrawals because you didnt need to ask the user for stuff inside them
+
+void Account::makeWithdrawals (Money money) {
+ 
+  update = true;
+  withdraws.push_back(money);
+  totalWidthdraws++;
 }
 
-void Account::makeWithdrawals (Money) {
-  int dollars, cents;
-  Account::update = true;
-  Account::withdraw += 1;
-  cout << "Enter dollars to withdraw: " << endl;
-  cin >> dollars;
-  Account::initialBalance.setDollars(dollars);
-  cout << "Enter cents to withdraw: ";
-  cin >> cents;
-  Account::initialBalance.setCents(cents);
-  Account::withdraws.push_back(initialBalance);
-}
-
-ostream& operator<<(std::ostream &stream, const Account &acc){
-  if (Account::needsUpdate) {
+ostream& operator << (std::ostream& stream, const Account& account){
+  if (account.update) {
       int centValue, dollarValue;
-      centValue = Account::initialBalance.getCents();
-      dollarValue = Account::initialBalance.getDollars();
 
-       if (Account::deposits.size() > 0) {
-          for (int i=0; i < Account::deposits.size(); i++) {
-						centValue += Account::deposits[i].getCents();
-            dollarValue += Account::deposits[i].getDollars();
+      centValue = initialBalance.getCents();
+      dollarValue = initialBalance.getDollars();
+
+       if (deposits.size() > 0) {
+          for (int i=0; i < deposits.size(); i++) {
+			centValue += deposits[i].getCents();
+            dollarValue += deposits[i].getDollars();
           }
         }
-        if (Account::totalWithdraws.size() > 0) {
-          for (int i=0; i < Account::totalWithdraws.size(); i++) {
-            centValue -= Account::totalWithdraws[i].getCents();
-            dollarValue -= Account::totalWithdraws[i].getDollars();
+        if (withdraws.size() > 0) {
+          for (int i=0; i < withdraws.size(); i++) {
+            centValue -= withdraws[i].getCents();
+            dollarValue -= withdraws[i].getDollars();
           }
         }
-  	Account::initialBalance.setCents(centValue);
-		Account::initialBalance.setDollars(dollarValue);
+  	initialBalance.setCents(centValue);
+	initialBalance.setDollars(dollarValue);
   }
 
-	stream << "Account Details\n--------------------------\nCurrent Balance:" << Account::initialBalance << endl;
-  stream << "\n--------------------------\nNumber of Deposits: " << Account::totalDeposits << endl;
+    stream << "Account Details "<< std::endl;
+    stream << "--------------------------"<< std::endl; 
+    stream << "Current Balance: "<< initialBalance << endl;
+    stream << "--------------------------\n";
+    stream << "Number of Deposits: " << totalDeposits << endl;
 	stream << "\n--------------------" << endl;
-  for (int i=0; i < Account::totalDeposits.size(); i++) {
-    stream << "(" << i << ") " << Account::totalDeposits[i] << endl;
-  }
 
-  stream << "--------------------------\nNumber of Withdrawals: " << Account::withdraw << endl;
-	stream << "\n--------------------" << endl;
-  for (int i=0; i < Account::totalWithdraws.size(); i++) {
-    stream << "(" << i << ") " << Account::totalWithdraws[i] << endl;
+        for (int i=0; i < deposits.size(); i++) {
+    stream << "(" << i << ") " << deposits[i] << endl;
+     }
+
+    stream << "--------------------------\n" << std::endl;
+    stream << "Number of Withdrawals: " << totalWidthdraws << endl;
+    stream << "\n--------------------" << endl;
+        for (int i=0; i <withdraws.size(); i++) {
+    stream << "(" << i << ") " <<withdraws[i] << endl;
   }
   return stream;
 }

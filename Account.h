@@ -11,7 +11,7 @@ class Account{
 
 	int totalDeposits = 0, totalWidthdraws = 0;
 
-
+	bool update = false;
 	
 	public:
 	 Account(Money);
@@ -22,6 +22,6 @@ class Account{
 	  void makeWithdrawals(Money);
 	  
 
-	  friend std::ostream operator <<(std::ostream& stream, const Account& account);
+	  friend std::ostream& operator << (std::ostream& stream, const Account& account);
 };
 
