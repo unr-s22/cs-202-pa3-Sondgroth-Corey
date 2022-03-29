@@ -11,4 +11,4 @@ Account.o::Account.cpp Account.h
 
 
 clean::
-	rm *.o project3
+	rm *.o 
