@@ -1,5 +1,5 @@
-#ifndef ACCOUNT_H
-#define ACCOUNT_H
+//#ifndef ACCOUNT_H
+//#define ACCOUNT_H
 
 #include <iostream>
 
@@ -36,4 +36,4 @@ class Money{
     friend std::ostream& operator << (std::ostream &stream, const Money &cash);
 
 };
-#endif ACCOUNT_H
+//#endif ACCOUNT_H
